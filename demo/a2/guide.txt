@@ -1,10 +1,14 @@
 create cluster: kind create cluster --name kind-1 --config k8s/kind/cluster-config.yaml
 
-at root folder OTOT-A2-A3, run this command to apply the deployment manifest: kubectl apply -f ./demo/a2/backend.yaml
+at root folder OTOT-A2-A3, run this command to apply the deployment manifest: kubectl apply -f ./demo/a2/deployment.yaml
 
-check if deploymentis running fine with this command: kubectl get deployment/backend --watch
+check if deployment is running fine with this command: kubectl get deployment/backend --watch
 
-label nodes retrospectively as ingress ready: kubectl label node <name> ingress-ready=true
+check on status of pods: kubectl get po -lapp=backend --watch
+
+label nodes retrospectively as ingress ready: kubectl label node <name> ingress-ready=true eg. kubectl label node kind-1-worker ingress-ready=true
+
+check that workers are ingress ready: kubectl get nodes -L ingress-ready
 
 create ingress controller by applying this manifest set: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 
