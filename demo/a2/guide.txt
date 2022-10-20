@@ -1,8 +1,8 @@
-create cluster: kind create cluster --name kind-1 --config k8s/kind/cluster-config.yaml
+(1) create cluster: kind create cluster --name kind-1 --config k8s/kind/cluster-config.yaml
 
-load local image into k8 cluster: kind load docker-image a1/app --name=kind-1
+(2) load local image into k8 cluster: kind load docker-image yanchenglee/taska1 --name=kind-1
 
-at root folder OTOT-A2-A3, run this command to apply the deployment manifest: kubectl apply -f ./demo/a2/deployment.yaml
+(3) at root folder OTOT-A2-A3, run this command to apply the deployment manifest: kubectl apply -f ./demo/a2/deployment.yaml
 
 check if deployment is running fine with this command: kubectl get deployment/a2 --watch
 
@@ -12,8 +12,12 @@ label nodes retrospectively as ingress ready: kubectl label node <name> ingress-
 
 check that workers are ingress ready: kubectl get nodes -L ingress-ready
 
-create ingress controller by applying this manifest set: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+(4) create ingress controller by applying this manifest set: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 
-create a service for deployment to allow ingress to expose a service: kubectl apply -f ./demo/a2/service.yaml
+(5) create a service for deployment to allow ingress to expose a service: kubectl apply -f ./demo/a2/service.yaml
 
-create an ingress object: kubectl apply -f ./demo/a2/ingress.yaml
+check that ingress controller is ready before applying ingress object: kubectl -n ingress-nginx get deploy
+
+(6) create an ingress object: kubectl apply -f ./demo/a2/ingress.yaml
+
+access the website at: http://localhost/app/ 
