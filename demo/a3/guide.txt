@@ -7,6 +7,10 @@ restart the Deployment using `kubectl -nkube-system rollout restart deploy/metri
 
 apply hpa: kubectl apply -f ./demo/a3/hpa.yml
 
+spam refresh at http://localhost/app/ 
+
+check hpa event log: kubectl describe hpa
+
 apply zone aware: kubectl apply -f ./demo/a3/deployment-zone-aware.yml
 
-cheeck zone aware allocation: kubectl get po -lapp=a2-zone-aware -owide
+check zone aware allocation: kubectl get po -lapp=a2-zone-aware -owide
