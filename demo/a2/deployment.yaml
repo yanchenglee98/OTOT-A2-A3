@@ -1,26 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: a2
   labels:
-    app: backend
+    app: a2
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: backend
+      app: a2
   template:
     metadata:
       labels:
-        app: backend
+        app: a2
     spec:
       containers:
-        - name: backend
+        - name: a2
           image: yanchenglee/taska1
+          imagePullPolicy: Never
           ports:
             - name: http
               containerPort: 3000
           resources:
             limits:
-              cpu: 40m
+              cpu: 20m
               memory: 100Mi

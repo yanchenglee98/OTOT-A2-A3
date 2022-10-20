@@ -1,10 +1,12 @@
 create cluster: kind create cluster --name kind-1 --config k8s/kind/cluster-config.yaml
 
+load local image into k8 cluster: kind load docker-image a1/app --name=kind-1
+
 at root folder OTOT-A2-A3, run this command to apply the deployment manifest: kubectl apply -f ./demo/a2/deployment.yaml
 
-check if deployment is running fine with this command: kubectl get deployment/backend --watch
+check if deployment is running fine with this command: kubectl get deployment/a2 --watch
 
-check on status of pods: kubectl get po -lapp=backend --watch
+check on status of pods: kubectl get po -lapp=a2 --watch
 
 label nodes retrospectively as ingress ready: kubectl label node <name> ingress-ready=true eg. kubectl label node kind-1-worker ingress-ready=true
 
